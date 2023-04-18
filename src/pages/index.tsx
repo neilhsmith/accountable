@@ -55,12 +55,20 @@ const Home: NextPageWithLayout = () => {
       <Button size="lg" rounded>
         <HiPlus />
       </Button>
+      <br />
+      <br />
+      <br />
+      <Button>idk</Button>
     </main>
   )
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout bgColor="bg-page-bg-tan">{page}</Layout>
+  return (
+    <Layout bgColor="bg-page-bg-tan" key="home">
+      {page}
+    </Layout>
+  )
 }
 
 export default Home

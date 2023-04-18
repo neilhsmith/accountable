@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react"
 import classNames from "classnames"
 import Header from "@/features/app/header"
 import Nav from "@/features/app/nav"
+import { motion } from "framer-motion"
 
 const Layout = ({
   children,
@@ -20,7 +21,14 @@ const Layout = ({
             <Nav />
           </div>
           <Header />
-          {children}
+          <motion.div
+            layout
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+          >
+            {children}
+          </motion.div>
         </div>
       </div>
     </>

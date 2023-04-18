@@ -6,6 +6,7 @@ import { SessionContextProvider, Session } from "@supabase/auth-helpers-react"
 import { Database } from "@/types/supabase"
 import { Inter } from "next/font/google"
 import { AppPropsWithLayout } from "@/features/app/types"
+import { AnimatePresence } from "framer-motion"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,7 +32,11 @@ function MyApp({ Component, pageProps }: Props) {
         supabaseClient={supabase}
         initialSession={pageProps.initialSession}
       >
-        {getLayout(<Component {...pageProps} />)}
+        <div className="overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            {getLayout(<Component {...pageProps} />)}
+          </AnimatePresence>
+        </div>
       </SessionContextProvider>
     </>
   )

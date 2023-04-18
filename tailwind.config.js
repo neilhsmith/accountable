@@ -41,11 +41,14 @@ module.exports = {
         sans: ["var(--font-sans)", "sans-serif"],
       },
       fontSize: {
+        xs: ".875rem", // 14px
         sm: "1rem", // 16px
         base: "1.125rem", // 18px
         lg: "1.5rem", // 24px,
         xl: "2rem", // 32px
-        "2xl": "4rem", // 64rem
+        "2xl": "3.25rem", // 52px
+        "3xl": "4.5rem", // 72px
+        "4xl": "6rem",
       },
       letterSpacing: {
         tight: "-0.05em",

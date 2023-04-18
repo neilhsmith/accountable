@@ -93,16 +93,17 @@ const Nav = () => {
         {shouldRenderActionBtn ? (
           <li className="absolute inset-x-0 top-0">
             <div className="relative">
-              <Button
-                as="a"
-                href="/dashboard#create"
-                rounded
-                size="lg"
-                className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
-              >
-                <HiPlus />
-                <span className="sr-only">Create today&apos;s list</span>
-              </Button>
+              <Link href="/dashboard#create" passHref legacyBehavior>
+                <Button
+                  as="a"
+                  rounded
+                  size="lg"
+                  className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+                >
+                  <HiPlus />
+                  <span className="sr-only">Create today&apos;s list</span>
+                </Button>
+              </Link>
             </div>
           </li>
         ) : null}
