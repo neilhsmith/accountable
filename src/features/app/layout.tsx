@@ -1,7 +1,8 @@
 import { PropsWithChildren } from "react"
 import classNames from "classnames"
 import Header from "@/features/app/header"
-import Nav from "@/features/app/nav"
+//import Nav from "@/features/app/nav"
+import Nav from "@/features/nav/nav"
 import { motion } from "framer-motion"
 
 const Layout = ({

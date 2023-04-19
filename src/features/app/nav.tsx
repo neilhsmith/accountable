@@ -13,6 +13,8 @@ import {
   HiUserAdd,
 } from "react-icons/hi"
 import Button from "@/common/components/button"
+import { useState } from "react"
+import NavBackground from "@/features/app/nav-background"
 
 const NAV_ITEMS = [
   {
@@ -54,12 +56,14 @@ const NAV_ITEMS = [
 ]
 
 const Nav = () => {
+  const [renderActionBtn, setRenderActionBtn] = useState(false)
+
   const user = useUser()
 
   const currMenu = !!user ? "LOGGED_IN" : "LOGGED_OUT"
   const navItems = NAV_ITEMS.filter((item) => item.menus.includes(currMenu))
 
-  const shouldRenderActionBtn = currMenu === "LOGGED_IN" && true // TODO: should also check if we've created a list today or not
+  const shouldRenderActionBtn = currMenu === "LOGGED_IN" && renderActionBtn // TODO: should also check if we've created a list today or not
 
   // when we have an even # of items and are rendering the action btn, we need to
   // offset the middle items horizontally to make space for the button
@@ -69,46 +73,81 @@ const Nav = () => {
       : null
 
   return (
-    <nav
-      className={classNames(
-        "relative aspect-4-1 sm:aspect-5-1 rounded drop-shadow-xl transform-gpu",
-        "flex flex-col justify-center sm:px-8",
-        shouldRenderActionBtn ? "bg-navbox" : "bg-white"
-      )}
-    >
-      <ul
-        className={classNames(
-          "flex justify-evenly sm:justify-between",
-          shouldRenderActionBtn && "pt-2%"
-        )}
+    <>
+      <button onClick={() => setRenderActionBtn(!renderActionBtn)}>asdf</button>
+      <div className="relative aspect-5-1">
+        {/* <motion.svg
+        id="navbox-bg"
+        viewBox="0 0 422 117"
+        fill="#ffffff"
+        className="rounded drop-shadow-xl transform-gpu"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {navItems.map((item, i) => (
-          <li
-            key={item.href}
-            className={classNames(i === offsetIdx && "mr-24 sm:mr-32 md:mr-42")}
+        <AnimatePresence mode="popLayout">
+          {shouldRenderActionBtn ? (
+            <motion.path
+              key="1"
+              transition={{
+                type: "spring",
+              }}
+              d="M0 3.96651e-06C0 3.96651e-06 45.5 2.28504e-06 105.5 3.96651e-06C165.5 5.64797e-06 168.018 34.814 210.5 35C253.538 35.1885 255 3.96651e-06 316 3.96651e-06C377 3.96651e-06 422 3.96651e-06 422 3.96651e-06V117H0V3.96651e-06Z"
+            />
+          ) : (
+            <motion.path
+              key="2"
+              transition={{
+                type: "spring",
+              }}
+              d="M0 1.00001C0 1.00001 45.5 1.00001 105.5 1.00001C165.5 1.00001 168.018 0.813965 210.5 1C253.538 1.18847 255 1.00001 316 1.00001C377 1.00001 422 1.00001 422 1.00001V118H0V1.00001Z"
+            />
+          )}
+        </AnimatePresence>
+      </motion.svg> */}
+        <NavBackground />
+        <nav
+          className={classNames(
+            "",
+            "flex flex-col justify-center sm:px-8"
+            //shouldRenderActionBtn ? "bg-navbox" : "bg-white"
+          )}
+        >
+          <ul
+            className={classNames(
+              "flex justify-evenly sm:justify-between",
+              shouldRenderActionBtn && "pt-2%"
+            )}
           >
-            <NavLink href={item.href} label={item.label} icon={item.icon} />
-          </li>
-        ))}
-        {shouldRenderActionBtn ? (
-          <li className="absolute inset-x-0 top-0">
-            <div className="relative">
-              <Link href="/dashboard#create" passHref legacyBehavior>
-                <Button
-                  as="a"
-                  rounded
-                  size="lg"
-                  className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
-                >
-                  <HiPlus />
-                  <span className="sr-only">Create today&apos;s list</span>
-                </Button>
-              </Link>
-            </div>
-          </li>
-        ) : null}
-      </ul>
-    </nav>
+            {navItems.map((item, i) => (
+              <li
+                key={item.href}
+                className={classNames(
+                  i === offsetIdx && "mr-24 sm:mr-32 md:mr-42"
+                )}
+              >
+                <NavLink href={item.href} label={item.label} icon={item.icon} />
+              </li>
+            ))}
+            {shouldRenderActionBtn ? (
+              <li className="absolute inset-x-0 top-0">
+                <div className="relative">
+                  <Link href="/dashboard#create" passHref legacyBehavior>
+                    <Button
+                      as="a"
+                      rounded
+                      size="lg"
+                      className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+                    >
+                      <HiPlus />
+                      <span className="sr-only">Create today&apos;s list</span>
+                    </Button>
+                  </Link>
+                </div>
+              </li>
+            ) : null}
+          </ul>
+        </nav>
+      </div>
+    </>
   )
 }
 
