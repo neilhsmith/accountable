@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format:check": "npx prettier --check ./src/",
+    "format:write": "npx prettier --write ./src/"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
