@@ -1,4 +1,4 @@
-import colors from "tailwindcss/colors"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 /**
  * The main Tailwind theme.
@@ -8,22 +8,30 @@ import colors from "tailwindcss/colors"
  */
 
 export default {
+  borderRadius: {
+    sm: ".625rem", // 10px
+    md: "1.25rem", // 20px
+    DEFAULT: "1.25rem",
+    lg: "1.875rem", // 30px
+    xl: "2.5rem", // 40px
+    full: defaultTheme.borderRadius.full,
+  },
   colors: {
     transparent: "transparent",
     current: "currentColor",
-    white: colors.white,
+    white: "#FFFFFF",
     black: {
-      DEFAULT: "#333333",
       light: "#616161",
+      DEFAULT: "#333333",
       dark: "#333333",
     },
     gray: {
-      DEFAULT: "#A4A4A4",
       light: "#D9D9D9",
+      DEFAULT: "#A4A4A4",
       dark: "#A4A4A4",
     },
 
-    faded: {
+    pages: {
       brown: "#ECE3DA",
       gray: "#E5E6E1",
       blue: "#E2EAF1",
@@ -33,19 +41,15 @@ export default {
       pink: "#ECDAEB",
     },
   },
-  // container: {
-  //   center: true,
-  //   padding: {
-  //     DEFAULT: "4px",
-  //   },
-  // },
+  dropShadow: {
+    DEFAULT: "0 .25rem .625rem rgba(0, 0, 0, 0.25)",
+  },
   fontFamily: {
     sans: ["var(--font-sans)", "sans-serif"],
   },
   screens: {
-    sm: "320px",
-    md: "0",
-    lg: "0",
-    xl: "764px",
+    sm: "412px",
+    md: "542px",
+    lg: "764px",
   },
 }

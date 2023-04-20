@@ -17,7 +17,7 @@ export default ({ addComponents }: TailwindPluginProps) => {
       paddingRight: "6px",
       marginLeft: "auto",
       marginRight: "auto",
-      "@screen xl": {
+      "@screen lg": {
         maxWidth: "764px",
         paddingLeft: "0",
         paddingRight: "0",
