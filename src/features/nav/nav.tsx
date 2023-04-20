@@ -53,16 +53,14 @@ const NAV_ITEMS = [
 ]
 
 const Nav = () => {
-  const [showNotch, setShowNotch] = useState(false)
-
   const user = useUser()
+  const [showNotch, setShowNotch] = useState(false)
 
   const currMenu = !!user ? "LOGGED_IN" : "LOGGED_OUT"
   const navItems = NAV_ITEMS.filter((item) => item.menus.includes(currMenu))
 
   const shouldRenderActionBtn = currMenu === "LOGGED_IN" && showNotch // TODO: should also check if we've created a list today or not
 
-  console.log("currMenu", currMenu)
   return (
     <>
       <div id="testcontrols" className="mb-10">

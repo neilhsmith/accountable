@@ -9,7 +9,7 @@ const NavButton = () => {
       initial={{ y: 56 }}
       animate={{ y: 0 }}
       exit={{ y: 56 }}
-      transition={{ type: "spring", bounce: 0.3 }}
+      transition={{ type: "spring", bounce: 0.65 }}
       className="-z-10"
     >
       <Link href="/dashboard#create" passHref legacyBehavior>
