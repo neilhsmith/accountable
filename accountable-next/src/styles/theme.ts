@@ -33,4 +33,19 @@ export default {
       pink: "#ECDAEB",
     },
   },
+  // container: {
+  //   center: true,
+  //   padding: {
+  //     DEFAULT: "4px",
+  //   },
+  // },
+  fontFamily: {
+    sans: ["var(--font-sans)", "sans-serif"],
+  },
+  screens: {
+    sm: "320px",
+    md: "0",
+    lg: "0",
+    xl: "764px",
+  },
 }
