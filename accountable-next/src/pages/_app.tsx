@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalFontStyle />
-      <Layout bgColor="bg-pages-green">
+      <Layout bgClassName="bg-pages-pink">
         <AnimatePresence mode="wait" initial={false}>
           <Component {...pageProps} />
         </AnimatePresence>

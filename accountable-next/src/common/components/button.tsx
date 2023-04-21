@@ -1,0 +1,93 @@
+import {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  forwardRef,
+  ForwardedRef,
+  RefObject,
+  useMemo,
+} from "react"
+import classNames from "classnames"
+
+/**
+ * FIXME:
+ * the types here have some issues: when an 'as' prop isn't set, both anchor and button props are available.
+ */
+
+type ButtonElementType = "a" | "button"
+
+type ButtonProps<T extends ButtonElementType = "button"> = {
+  as?: T
+  rounded?: boolean
+  size?: "sm" | "md" | "lg"
+  theme?: "primary" | "secondary"
+} & (T extends undefined | "button"
+  ? ButtonHTMLAttributes<HTMLButtonElement>
+  : AnchorHTMLAttributes<HTMLAnchorElement>)
+
+const Button = forwardRef(
+  <T extends ButtonElementType = "button">(
+    {
+      as,
+      children,
+      className,
+      rounded,
+      size,
+      theme = "primary",
+      ...rest
+    }: ButtonProps<T>,
+    ref: ForwardedRef<T>
+  ) => {
+    const colors = useMemo(
+      () => ({
+        primary: "bg-black-dark text-white border-2 border-black-dark",
+        secondary: "bg-white text-black-dark border-2 border-gray",
+      }),
+      []
+    )
+    const sizes = useMemo(
+      () => ({
+        sm: rounded
+          ? "w-6 h-6 text-sm sm:w-10 sm:h-10 sm:text-sm md:w-12 md:h-12"
+          : "text-xs font-medium px-2 py-1 sm:px-3 sm:py-1 md:px-5 md:py-2",
+        md: rounded
+          ? "w-10 h-10 text-sm sm:w-14 sm:h-14 sm:text-base md:w-16 md:h-16"
+          : "text-sm font-medium px-3 py-1 sm:px-5 sm:py-2 md:px-7 md:py-3",
+        lg: rounded
+          ? "w-14 h-14 text-lg sm:w-20 sm:h-20 sm:text-xl md:w-28 md:h-28 lg:w-32 lg:h-32"
+          : "text-sm font-medium px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4",
+      }),
+      [rounded]
+    )
+
+    const classes = classNames(
+      "inline-flex justify-center items-center rounded-full cursor-pointer",
+      colors[theme],
+      size && sizes[size],
+      className
+    )
+
+    if (as === "a") {
+      return (
+        <a
+          className={classes}
+          ref={ref as RefObject<HTMLAnchorElement>}
+          {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
+        >
+          {children}
+        </a>
+      )
+    }
+
+    return (
+      <button
+        className={classes}
+        ref={ref as RefObject<HTMLButtonElement>}
+        {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
+      >
+        {children}
+      </button>
+    )
+  }
+)
+
+export default Button
