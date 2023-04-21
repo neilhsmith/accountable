@@ -176,7 +176,7 @@ function NavLink({ item }: { item: Item }) {
       <span className="sr-only">{label}</span>
       <Icon
         className={classNames(
-          "h-full w-3/4 max-w-[2.2rem] sm:max-w-[3rem] md:max-w-[4.6rem] lg:max-w-[5.25rem]",
+          "w-4/6 h-auto",
           active ? "text-black-dark stroke-2" : "text-black-light stroke-1"
         )}
       />
