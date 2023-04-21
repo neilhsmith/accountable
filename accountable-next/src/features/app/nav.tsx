@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import classNames from "classnames"
 import {
-  HiCog,
+  HiOutlineCog,
   HiOutlineLogin,
   HiOutlineLogout,
   HiOutlineViewList,
@@ -51,7 +51,7 @@ const NAV_ITEMS = [
   {
     href: "/settings",
     label: "Settings",
-    icon: HiCog,
+    icon: HiOutlineCog,
     menus: ["LOGGED_IN"],
   },
   {
@@ -119,14 +119,17 @@ const Nav = () => {
 
   return (
     <>
-      <div id="testcontrols" className="mb-10">
-        <button
-          onClick={() => setShape(shape === "square" ? "notched" : "square")}
-        >
-          GG
-        </button>
-      </div>
       <motion.nav initial={shape} animate={shape} className="relative">
+        <div
+          id="testcontrols"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-50"
+        >
+          <button
+            onClick={() => setShape(shape === "square" ? "notched" : "square")}
+          >
+            GG
+          </button>
+        </div>
         <svg
           viewBox="0 0 100 27"
           className="fill-white rounded md:rounded-lg lg:rounded-xl drop-shadow transform-gpu"
