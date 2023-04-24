@@ -119,17 +119,14 @@ const Nav = () => {
 
   return (
     <>
-      <motion.nav initial={shape} animate={shape} className="relative">
-        <div
-          id="testcontrols"
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-50"
+      <div id="testcontrols" className="">
+        <button
+          onClick={() => setShape(shape === "square" ? "notched" : "square")}
         >
-          <button
-            onClick={() => setShape(shape === "square" ? "notched" : "square")}
-          >
-            GG
-          </button>
-        </div>
+          GG
+        </button>
+      </div>
+      <motion.nav initial={shape} animate={shape} className="relative">
         <svg
           viewBox="0 0 100 27"
           className="fill-white rounded md:rounded-lg lg:rounded-xl drop-shadow transform-gpu"
@@ -146,12 +143,12 @@ const Nav = () => {
             ))}
           </motion.ul>
         </div>
-        <div className="absolute top-0 inset-x-0 h-full flex justify-center">
+        <div className="absolute top-0 inset-x-0 h-full flex justify-center pointer-events-none">
           <motion.div variants={buttonVariants}>
             <Link
               href="/dashboard#create"
               passHref
-              className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/2 aspect-square"
+              className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/2 aspect-square pointer-events-auto"
             >
               <Button rounded className="w-full h-full">
                 <HiOutlinePlus className="w-1/2 h-1/2 md:w-2/5 md:h-2/5" />
