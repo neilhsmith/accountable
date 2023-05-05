@@ -33,7 +33,16 @@ const theme = {
   fontFamily: {
     sans: "var(--font-inter)",
   },
-  ringColor: {},
+  fontSize: {
+    base: "1rem",
+    lg: "1.25rem",
+    xl: "1.5rem",
+  },
+  letterSpacing: {
+    tight: "-.025em",
+    normal: "0",
+    wide: ".1em",
+  },
 }
 
 export default theme
