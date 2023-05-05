@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react"
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-type ButtonVariantProps = VariantProps<typeof buttonVariants>
-const buttonVariants = cva(
+export type ButtonVariant = VariantProps<typeof buttonCVA>
+export const buttonCVA = cva(
   [
     "border",
     "focus:outline outline-offset-2 outline-1 outline-black",
@@ -45,23 +45,39 @@ const buttonVariants = cva(
   }
 )
 
-type ButtonProps = ButtonVariantProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement>
+/**
+ * FIXME:
+ *
+ * the polymorphic typing here is working okay but could be improved:
+ * - `type` should be required when setting `as` to 'button'
+ * - `href` should be required when setting `as` to 'a'
+ */
 
-const Button = ({
+type ButtonProps<T extends ElementType = "a" | "button"> = {
+  as?: T
+  children: ReactNode
+} & ButtonVariant &
+  ComponentPropsWithoutRef<T>
+
+const Button = <T extends ElementType = "button">({
+  as,
   children,
   fullWidth,
   intent,
   round,
   size,
   ...rest
-}: PropsWithChildren<ButtonProps>) => (
-  <button
-    className={buttonVariants({ fullWidth, intent, round, size })}
-    {...rest}
-  >
-    {children}
-  </button>
-)
+}: ButtonProps<T>) => {
+  const Component = as || "button"
+
+  return (
+    <Component
+      className={buttonCVA({ fullWidth, intent, round, size })}
+      {...rest}
+    >
+      {children}
+    </Component>
+  )
+}
 
 export default Button
