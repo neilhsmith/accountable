@@ -1,7 +1,10 @@
+import "./globals.css"
 import type { PropsWithJustChildren } from "@/types/react"
 import { inter } from "@/app/fonts"
-import "./globals.css"
 import SkipToContent from "@/common/components/skip-to-content"
+import PageTransition from "@/common/components/page-transition"
+import Container from "@/common/components/container"
+import Nav from "@/app/nav"
 
 export const metadata = {
   title: "accountable",
@@ -13,10 +16,16 @@ export default function RootLayout({ children }: PropsWithJustChildren) {
     <html lang="en" className={`${inter.variable}`}>
       <body className="font-sans tracking-normal">
         <SkipToContent />
-        <header role="banner">
-          <span className="text-xl tracking-wide">accountable</span>
-        </header>
-        {children}
+        <Container fixed="bottom">
+          <Nav />
+        </Container>
+        <PageTransition />
+        <Container>
+          <header role="banner">
+            <span className="text-xl tracking-wide">accountable</span>
+          </header>
+          {children}
+        </Container>
       </body>
     </html>
   )

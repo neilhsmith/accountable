@@ -1,4 +1,5 @@
 import theme from "./src/app/theme"
+import container from "./src/common/tailwind/mobile-container"
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -6,5 +7,5 @@ module.exports = {
   theme: {
     ...theme,
   },
-  plugins: [],
+  plugins: [container],
 }

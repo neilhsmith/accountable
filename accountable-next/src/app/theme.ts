@@ -43,6 +43,11 @@ const theme = {
     normal: "0",
     wide: ".1em",
   },
+  screens: {
+    sm: "412px",
+    md: "542px",
+    lg: "764px",
+  },
 }
 
 export default theme
