@@ -54,7 +54,6 @@ const Nav = () => {
             }}
             className={cx(
               "absolute -z-10 -top-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full",
-              "border-[24px]",
               flourishClassName
             )}
           />
