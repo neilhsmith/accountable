@@ -22,7 +22,9 @@ export default function RootLayout({ children }: PropsWithJustChildren) {
         <PageTransition />
         <Container>
           <header role="banner">
-            <span className="text-xl tracking-wide">accountable</span>
+            <span className="text-xl tracking-wide relative z-10">
+              accountable
+            </span>
           </header>
           {children}
         </Container>
