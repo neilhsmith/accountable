@@ -1,7 +1,12 @@
 "use client"
 
+/**
+ * TODO: optimze this. the whole thing shouldn't be a client component and some callbacks can probably be memoized
+ */
+
+import type { Route } from "next"
 import Link from "next/link"
-import { PropsWithChildren, useCallback } from "react"
+import { PropsWithChildren } from "react"
 import { useToggle } from "react-use"
 import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/navigation"
@@ -12,11 +17,9 @@ const Nav = () => {
   const router = useRouter()
   const [flourish, setFlourish] = useToggle(false)
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = <T extends string>(href: Route<T>) => {
     /**
-     * TODO:
-     *
-     * do i need to do this with a setTimeout?
+     * TODO: do i need to do this with a setTimeout?
      * would be cleaner to get the end of animation directly in framer
      */
 
@@ -44,7 +47,7 @@ const Nav = () => {
             transition={{
               duration: FLOURISH_TIME / 1000,
             }}
-            className="absolute -z-10 -top-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-page-logout"
+            className="absolute -z-10 -top-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[purple]"
           />
         ) : null}
       </AnimatePresence>
@@ -71,11 +74,14 @@ const Nav = () => {
 
 export default Nav
 
-const NavLink = ({
+const NavLink = <T extends string>({
   children,
   href,
   onClick,
-}: PropsWithChildren<{ href: string; onClick: (href: string) => void }>) => {
+}: PropsWithChildren<{
+  href: Route<T>
+  onClick: (href: Route<T>) => void
+}>) => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
     onClick(href)
