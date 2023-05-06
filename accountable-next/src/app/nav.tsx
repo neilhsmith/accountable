@@ -1,39 +1,44 @@
 "use client"
 
 /**
- * TODO: optimze this. the whole thing shouldn't be a client component and some callbacks can probably be memoized
+ * TODO:
+ * - optimze this. the whole thing shouldn't be a client component and some callbacks can probably be memoized
+ * - instead of scaling, move. an element can be placed off viewport which is the same size as the viewport, just transition it to 0/0. can use a border w/ moving
  */
 
-import type { Route } from "next"
 import Link from "next/link"
-import { PropsWithChildren } from "react"
-import { useToggle } from "react-use"
-import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/navigation"
+import { PropsWithChildren, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { cx } from "class-variance-authority"
+import { AppRoute } from "@/common/cva/page-background"
+import pageBackgroundCVA from "@/common/cva/page-background"
 
-const FLOURISH_TIME = 200
+const FLOURISH_TIME = 1000
 
 const Nav = () => {
   const router = useRouter()
-  const [flourish, setFlourish] = useToggle(false)
+  //const [flourish, setFlourish] = useToggle(false)
+  const [navToPathname, setNavToPathname] = useState<AppRoute | null>(null)
+  const flourishClassName = pageBackgroundCVA({ pathname: navToPathname })
 
-  const handleLinkClick = <T extends string>(href: Route<T>) => {
+  const handleLinkClick = (pathname: AppRoute) => {
     /**
      * TODO: do i need to do this with a setTimeout?
      * would be cleaner to get the end of animation directly in framer
      */
 
-    setFlourish(true)
+    setNavToPathname(pathname)
     setTimeout(() => {
-      router.push(href)
-      setFlourish(false)
+      router.push(pathname)
+      setNavToPathname(null)
     }, FLOURISH_TIME)
   }
 
   return (
     <nav aria-label="Main nav" role="navigation" className="relative">
       <AnimatePresence initial={false}>
-        {flourish ? (
+        {!!navToPathname ? (
           <motion.div
             animate={{
               scale: 200,
@@ -47,7 +52,11 @@ const Nav = () => {
             transition={{
               duration: FLOURISH_TIME / 1000,
             }}
-            className="absolute -z-10 -top-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[purple]"
+            className={cx(
+              "absolute -z-10 -top-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full",
+              "border-[24px]",
+              flourishClassName
+            )}
           />
         ) : null}
       </AnimatePresence>
@@ -74,13 +83,13 @@ const Nav = () => {
 
 export default Nav
 
-const NavLink = <T extends string>({
+const NavLink = <T extends AppRoute>({
   children,
   href,
   onClick,
 }: PropsWithChildren<{
-  href: Route<T>
-  onClick: (href: Route<T>) => void
+  href: AppRoute
+  onClick: (href: AppRoute) => void
 }>) => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
