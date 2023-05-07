@@ -5,8 +5,8 @@ type ContainerVariant = VariantProps<typeof containerCVA>
 const containerCVA = cva("container mx-auto", {
   variants: {
     fixed: {
-      bottom: "fixed bottom-0 inset-x-0",
-      top: "fixed top-0 inset-x-0",
+      bottom: "fixed bottom-0 inset-x-0 pb-2",
+      top: "fixed top-0 inset-x-0 pt-2",
     },
   },
 })

@@ -14,11 +14,10 @@ import { cx } from "class-variance-authority"
 import { AppRoute } from "@/common/cva/page-background"
 import pageBackgroundCVA from "@/common/cva/page-background"
 
-const FLOURISH_TIME = 1000
+const FLOURISH_TIME = 200
 
 const Nav = () => {
   const router = useRouter()
-  //const [flourish, setFlourish] = useToggle(false)
   const [navToPathname, setNavToPathname] = useState<AppRoute | null>(null)
   const flourishClassName = pageBackgroundCVA({ pathname: navToPathname })
 
@@ -54,7 +53,8 @@ const Nav = () => {
             }}
             className={cx(
               "absolute -z-10 -top-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full",
-              flourishClassName
+              "bg-[purple]"
+              //flourishClassName
             )}
           />
         ) : null}
