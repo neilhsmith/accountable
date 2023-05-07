@@ -25,3 +25,5 @@ const Link = <T extends string>({
     </NextLink>
   )
 }
+
+export default Link

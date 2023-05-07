@@ -1,5 +1,6 @@
 "use client"
 
+import { Route } from "next"
 import { useRouter } from "next/navigation"
 import { PropsWithChildren, ReactNode, createContext, useContext } from "react"
 
@@ -9,7 +10,7 @@ type PageTransition = {
 }
 
 type PageTransitionContextProps = {
-  pushRoute: (href: string) => void
+  pushRoute: (href: Route<string>) => void
 }
 
 type PageTransitionProviderProps = {
@@ -18,7 +19,7 @@ type PageTransitionProviderProps = {
 }
 
 const PageTransitionContext = createContext<PageTransitionContextProps>({
-  pushRoute: (_: string) => null,
+  pushRoute: (_: Route<string>) => null,
 })
 
 export const PageTransitionProvider = ({
@@ -29,7 +30,7 @@ export const PageTransitionProvider = ({
   const router = useRouter()
 
   // FIXME: think this fn should get more data from the underlying Link (link NextLink's scroll prop) cause there could be some work to do after the animation. or omit those props in my Link's prop type
-  const pushRoute = (href: string) => {
+  const pushRoute = (href: Route<string>) => {
     // get the transition component, mount it, and start a timeout to unmount it/do the navigation
 
     let pageTransition: PageTransition | undefined
